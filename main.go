@@ -17,11 +17,11 @@ func main() {
 	account001.balance = 500
 
 	fmt.Println(account001.balance)
-	fmt.Println(account001.withdraw(200))
+	fmt.Println(account001.Deposit(100))
 	fmt.Println(account001.balance)
 }
 
-func (c *CheckingAccount) withdraw(withdrawValue float64) string {
+func (c *CheckingAccount) Withdraw(withdrawValue float64) string {
 	enabled := withdrawValue <= c.balance && withdrawValue > 0
 
 	if enabled {
@@ -29,5 +29,14 @@ func (c *CheckingAccount) withdraw(withdrawValue float64) string {
 		return "Saque realizado com sucesso"
 	} else {
 		return "Saldo insuficiente"
+	}
+}
+
+func (c *CheckingAccount) Deposit(depositValue float64) (string, float64) {
+	if depositValue > 0 {
+		c.balance += depositValue
+		return "Depósito realizado com sucesso", c.balance
+	} else {
+		return "Depósito não realizado, contate a gerência para mais infomações", c.balance
 	}
 }
