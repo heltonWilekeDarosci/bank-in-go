@@ -10,7 +10,24 @@ type CheckingAccount struct {
 }
 
 func main() {
-	Account001 := CheckingAccount{"Helton", 2423, 123456, 150.43}
+	account001 := CheckingAccount{}
+	account001.holder = "Helton"
+	account001.agencyNumber = 123
+	account001.accountNumber = 123456
+	account001.balance = 500
 
-	fmt.Println(Account001)
+	fmt.Println(account001.balance)
+	fmt.Println(account001.withdraw(200))
+	fmt.Println(account001.balance)
+}
+
+func (c *CheckingAccount) withdraw(withdrawValue float64) string {
+	enabled := withdrawValue <= c.balance && withdrawValue > 0
+
+	if enabled {
+		c.balance -= withdrawValue
+		return "Saque realizado com sucesso"
+	} else {
+		return "Saldo insuficiente"
+	}
 }
